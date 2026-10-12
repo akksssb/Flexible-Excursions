@@ -190,7 +190,7 @@ body {
   font-size: 32px;
   font-weight: 700;
   color: #000000;
-  margin-top: 55px;    
+  margin-top: 25px; 
   margin-bottom: 25px; 
   text-align: left;    
 }
@@ -218,7 +218,7 @@ body {
   max-width: 1160px; 
   margin: 0 auto;
   padding: 20px 0;
-  margin-bottom: 55px;
+  margin-bottom: 0px
 }
 
 .carousel-track {
@@ -274,7 +274,7 @@ body {
     margin-bottom: 20px;
   }
 
-  .about-title, .tours-title {
+  .about-title, .tours-title  {
     font-size: 26px !important;
     margin-top: 15px !important;
     margin-bottom: 15px !important;
@@ -554,7 +554,7 @@ body {
 .form-group select:focus,
 .form-group textarea:focus {
   border-color: #000000;
-  box-shadow: 0 0 0 3px rgba(30, 48, 80, 0.15);
+  box-shadow: 0 0 0 3px #00000026;
 }
 
 /* Нижняя часть формы с кнопкой */
@@ -922,9 +922,10 @@ body {
 /* =================================
     СТИЛИ ДЛЯ СТАТИЧНОГО БЛОКА FAQ
    ============================== */
+
 .faq-static-section {
   width: 100%;
-  padding: 10px 20px 60px 20px;
+  padding: 10px 20px 40px 20px;
 }
 
 .faq-static-container {
@@ -1009,7 +1010,7 @@ body {
 
 .guides-section {
   width: 100%;
-  padding: 40px 20px;
+  padding: 10px 20px 50px 20px; 
 }
 
 .guides-container {
@@ -1130,7 +1131,7 @@ body {
 
 .reviews-section {
   width: 100%;
-  padding: 40px 20px 60px 20px;
+  padding: 10px 20px 30px 20px;
   overflow: hidden;
 }
 
@@ -1413,4 +1414,290 @@ body {
 .review-star, .review-star-half path {
   /* Задаем фирменный золотисто-желтый цвет для звезд */
   fill: #ffbc00 !important; 
+}
+
+/* ===============================
+   СТИЛИ ДЛЯ БЛОКА «КАК ВСЁ УСТРОЕНО»
+================================ */
+
+.process-section {
+  width: 100%;
+  padding: 50px 20px 0px 20px; 
+  background-color: #ffffff;
+}
+
+.process-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.process-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.step-card {
+  background-color: #ffffff;
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+.step-number {
+  font-size: 42px;
+  font-weight: 800;
+  /* Используем ваш акцентный темно-синий цвет для номеров */
+  color: #00000026; 
+  margin-bottom: 15px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.step-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 12px;
+}
+
+.step-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #555555;
+  margin: 0;
+}
+
+/* =====================================
+   СТИЛИ ДЛЯ БЛОКА «ЧЕК-ЛИСТ ТУРИСТА»
+======================================= */
+
+.checklist-section {
+  width: 100%;
+  padding: 40px 20px 30px 20px;
+  background-color: #ffffff;
+}
+
+.checklist-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.checklist-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 10px;
+}
+
+.checklist-subtitle {
+  font-size: 15px;
+  color: #555555;
+  margin-bottom: 35px;
+  max-width: 700px;
+  line-height: 1.5;
+}
+
+/* Стили вкладок (Табов) */
+.checklist-tabs {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #eaeaea;
+  padding-bottom: 15px;
+}
+
+.tab-btn {
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 12px 24px;
+  background: none;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  color: #555555;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+   display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important; 
+}
+
+.tab-btn:hover {
+  border-color: #000000;
+  color: #000000;
+}
+
+/* Активный таб в вашем фирменном стиле */
+.tab-btn.active {
+  background-color: #000000 !important;
+  border-color: #000000 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px #00000033;
+}
+
+/* Панели с контентом */
+.checklist-pane {
+  display: none; /* Скрыто по умолчанию */
+  animation: fadeInPane 0.4s ease;
+}
+
+.checklist-pane.active {
+  display: block; /* Показывается при активации */
+}
+
+.checklist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 30px;
+}
+
+.checklist-box {
+  background-color: #ffffff;
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.checklist-box h4 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #f5f5f5;
+  padding-bottom: 10px;
+}
+
+.checklist-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.checklist-box li {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #444444;
+  margin-bottom: 12px;
+  position: relative;
+  padding-left: 25px;
+}
+
+/* Галочки перед пунктами списка */
+.checklist-box li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #000000; /* Ваша фирменная галочка */
+  font-weight: bold;
+  font-size: 16px;
+}
+
+@keyframes fadeInPane {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- АДАПТИВНОСТЬ ПОД МОБИЛЬНЫЕ (экраны ≤ 768px) --- */
+@media (max-width: 768px) {
+  .process-title, .checklist-title {
+    font-size: 26px !important;
+    margin-bottom: 25px;
+  }
+
+  .checklist-tabs {
+    flex-direction: column;
+    gap: 10px;
+    border-bottom: none;
+  }
+
+  .tab-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .checklist-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* =======================
+    ИКОНКИ И ОТСТУПЫ
+======================= */
+
+.no-margin {
+  margin-top: 15px !important; /* Уменьшает пробел сверху до аккуратных 15 пикселей */
+}
+
+/* Настройка стилизации самой иконки */
+.tab-icon {
+  width: 18px !important;  /* Пропорциональный размер под шрифт */
+  height: 18px !important;
+  flex-shrink: 0;
+}
+
+/* Цвет иконки по умолчанию (когда вкладка не активна) */
+.tab-icon path {
+  fill: #000000 !important; /* Наследует ваш фирменный цвет */
+  transition: fill 0.2s ease;
+}
+
+/* Интерактивный эффект при наведении мыши */
+.tab-btn:hover {
+  border-color: #000000;
+  color: #000000;
+}
+.tab-btn:hover .tab-icon path {
+  fill: #000000 !important; /* Иконка темнеет вместе с текстом */
+}
+
+/* Стили для АКТИВНОЙ вкладки */
+.tab-btn.active {
+  background-color: #000000 !important;
+  border-color: #000000 !important;
+  color: #ffffff !important; /* Текст становится белым */
+  box-shadow: 0 4px 12px #00000033;
+}
+
+/* Главное: когда вкладка активна, иконка внутри неё ПРИНУДИТЕЛЬНО становится белой */
+.tab-btn.active .tab-icon path {
+  fill: #ffffff !important;
+}
+
+/* Выравнивание заголовков внутри коробок чек-листа */
+.checklist-box h4 {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important; /* Отступ между иконкой ботинка и текстом */
+}
+
+/* Настройка параметров SVG-иконки ботинка */
+.pane-icon {
+  width: 20px !important;  /* Пропорциональный размер под шрифт h4 */
+  height: 20px !important;
+  flex-shrink: 0;
+}
+
+.pane-icon path {
+  fill: #000000 !important; /* Ваш фирменный глубокий синий цвет */
 }
