@@ -207,3 +207,31 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
+// ==========================================================================
+//          ЛОГИКА ПЕРЕКЛЮЧЕНИЯ ТАБОВ ДЛЯ ЧЕК-ЛИСТА ЭКИПИРОВКИ
+// ==========================================================================
+document.addEventListener('DOMContentLoaded', function () {
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const tabPanes = document.querySelectorAll('.checklist-pane');
+
+  if (tabButtons.length > 0 && tabPanes.length > 0) {
+    tabButtons.forEach(button => {
+      button.addEventListener('click', function () {
+        const targetTab = this.getAttribute('data-tab');
+
+        // 1. Убираем активный класс у всех кнопок и добавляем текущей
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+
+        // 2. Скрываем все панели со списками вещей и показываем нужную
+        tabPanes.forEach(pane => {
+          pane.classList.remove('active');
+          if (pane.getAttribute('id') === targetTab) {
+            pane.classList.add('active');
+          }
+        });
+      });
+    });
+  }
+});
