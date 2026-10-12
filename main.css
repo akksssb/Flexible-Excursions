@@ -1390,3 +1390,27 @@ body {
   border-color: #000000 !important;
   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1) !important;
 }
+
+/* ==============================
+        ЗВЁЗДЫ В ОТЗЫВАХ
+=============================== */
+
+/* Контейнер для звёзд рейтинга */
+.review-rating {
+  display: flex !important;
+  align-items: center !important;
+  gap: 3px !important; /* Небольшой аккуратный зазор между звёздами */
+  white-space: nowrap;
+}
+
+/* Новые SVG иконки звёзд */
+.review-star, .review-star-half {
+  width: 16px !important;  /* Оптимальный размер под высоту шапки отзыва */
+  height: 16px !important;
+  flex-shrink: 0;          /* Запрещает иконкам сжиматься */
+}
+
+.review-star, .review-star-half path {
+  /* Задаем фирменный золотисто-желтый цвет для звезд */
+  fill: #ffbc00 !important; 
+}
