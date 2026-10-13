@@ -1760,27 +1760,24 @@ body {
   background: #000000; z-index: 10000; width: 0%;
   transition: width 0.1s ease-out;
 }
-/* =======================================================
-   ИТОГОВЫЙ АЛЬТИМЕТР (ЛИНИЯ СПРАВА У СКРОЛЛА, ПОДПИСИ СЛЕВА)
-   ======================================================= */
+/* =============================
+        ИНДИКАТОР ВЫСОТЫ
+   ========================== 
 .altimeter-container {
   position: fixed;
-  /* Прижимаем контейнер к правому краю экрана, прямо к скроллбару */
   right: 10px; 
   top: 50%;
   transform: translateY(-50%);
   height: 300px; 
-  /* Ширина контейнера для правильного позиционирования элементов внутри */
   width: 105px; 
   z-index: 998; 
   font-family: "Montserrat", sans-serif;
   user-select: none;
 }
 
-/* Вертикальная шкала-основа — ТЕПЕРЬ СТРОГО СПРАВА */
 .altimeter-scale {
   position: absolute;
-  right: 0; /* Прижимаем шкалу к правому краю контейнера */
+  right: 0;
   top: 0;
   width: 4px;
   height: 100%;
@@ -1788,7 +1785,6 @@ body {
   border-radius: 2px;
 }
 
-/* Заполняющаяся линия скролла */
 .altimeter-bar {
   position: absolute;
   bottom: 0; 
@@ -1800,13 +1796,11 @@ body {
   transition: height 0.1s ease-out;
 }
 
-/* Плавающий указатель с цифрами — ТЕПЕРЬ СЛЕВА ОТ ЛИНИИ */
 .altimeter-pointer {
   position: absolute;
   bottom: 0%; 
-  /* Отодвигаем маркер влево от линии, чтобы он не перекрывал её */
   right: 14px; 
-  transform: translateY(50%); /* Центрирование по вертикали */
+  transform: translateY(50%);
   background-color: #000000;
   color: #ffffff;
   padding: 6px 10px;
@@ -1818,23 +1812,19 @@ body {
   transition: bottom 0.1s ease-out;
 }
 
-/* Стрелочка плавающего маркера — ТЕПЕРЬ СМОТРИТ НАПРАВО НА ЛИНИЮ */
 .altimeter-pointer::before {
   content: "";
   position: absolute;
-  right: -4px; /* Выносим стрелочку вправо за пределы маркера */
+  right: -4px;
   top: 50%;
   transform: translateY(-50%);
   border-top: 4px solid transparent;
   border-bottom: 4px solid transparent;
-  /* Меняем border-right на border-left, чтобы развернуть стрелку направо */
   border-left: 4px solid #000000; 
 }
 
-/* Текстовые подписи крайних точек — ТЕПЕРЬ НАХОДЯТСЯ СЛЕВА ОТ ВСЕГО */
 .altimeter-labels {
-  position: absolute;
-  /* Прижимаем подписи к левому краю контейнера, чтобы они были левее маркера */
+  position: absolute;/
   left: 0; 
   top: 0;
   height: 100%;
@@ -1845,10 +1835,8 @@ body {
   font-weight: 500;
   color: #777777;
   pointer-events: none;
-  /* Выравниваем текст по правому краю, чтобы он красиво подходил к маркеру */
   text-align: right; 
   width: 100%;
-  /* Небольшой отступ справа, чтобы текст не сливался со шкалой */
   padding-right: 80px; 
 }
 
@@ -1856,12 +1844,13 @@ body {
   white-space: nowrap;
 }
 
-/* Автоматически скрываем виджет на смартфонах и планшетах */
 @media (max-width: 1024px) {
   .altimeter-container {
     display: none !important;
   }
 }
+
+*/
 
 /* ===========================
         АНИМАЦИЯ ФОНА
