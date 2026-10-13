@@ -1434,45 +1434,8 @@ body {
   width: 100%;
   padding: 50px 20px 50px 20px;
   position: relative; /* Критично: создает рамки для фонового слоя */
-  background-color: #ffffff !important; 
   z-index: 1; /* Поднимает текст и карточки над фоном */
 }
-
-/* Изолированный невидимый слой чисто под узор и маску */
-.process-section::before {
-  content: "" !important;
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  z-index: -1 !important; /* Уводит узор под карточки и текст */
-  pointer-events: none !important; /* Чтобы фон не мешал кликам */
-  
-  /* Наш бесшовный векторный узор */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://w3.org' width='80' height='80' viewBox='0 0 640 640'%3E%3Cpath fill='rgba(30, 48, 80, 0.035)' d='M576 112C576 100.9 570.3 90.6 560.8 84.8C551.3 79 539.6 78.4 529.7 83.4L413.5 141.5L234.1 81.6C226 78.9 217.3 79.5 209.7 83.3L81.7 147.3C70.8 152.8 64 163.9 64 176L64 528C64 539.1 69.7 549.4 79.2 555.2C88.7 561 100.4 561.6 110.3 556.6L226.4 498.5L399.7 556.3C395.4 549.9 391.2 543.2 387.1 536.4C376.1 518.1 365.2 497.1 357.1 474.6L255.9 440.9L255.9 156.4L383.9 199.1L383.9 298.4C414.9 262.6 460.9 240 511.9 240C534.5 240 556.1 244.4 575.9 252.5L576 112zM512 288C445.7 288 392 340.8 392 405.9C392 474.8 456.1 556.3 490.6 595.2C502.2 608.2 521.9 608.2 533.5 595.2C568 556.3 632.1 474.8 632.1 405.9C632.1 340.8 578.4 288 512.1 288zM472 408C472 385.9 489.9 368 512 368C534.1 368 552 385.9 552 408C552 430.1 534.1 448 512 448C489.9 448 472 430.1 472 408z'/%3E%3C/svg%3E") !important;
-  
-  background-repeat: repeat !important;
-  background-size: 60px 60px !important; 
-  
-  /* Накладываем маску ТОЛЬКО на этот слой с узором */
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 1) 15%,
-    rgba(0, 0, 0, 1) 85%,
-    rgba(0, 0, 0, 0) 100%
-  ) !important;
-  
-  mask-image: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 1) 15%,
-    rgba(0, 0, 0, 1) 85%,
-    rgba(0, 0, 0, 0) 100%
-  ) !important;
-}
-
 
 .process-container {
   max-width: 1200px;
@@ -1539,7 +1502,6 @@ body {
 .checklist-section {
   width: 100%;
   padding: 40px 20px 30px 20px;
-  background-color: #ffffff;
 }
 
 .checklist-container {
@@ -1797,4 +1759,124 @@ body {
   position: fixed; top: 0; left: 0; height: 3px;
   background: #000000; z-index: 10000; width: 0%;
   transition: width 0.1s ease-out;
+}
+/* =======================================================
+   ИТОГОВЫЙ АЛЬТИМЕТР (ЛИНИЯ СПРАВА У СКРОЛЛА, ПОДПИСИ СЛЕВА)
+   ======================================================= */
+.altimeter-container {
+  position: fixed;
+  /* Прижимаем контейнер к правому краю экрана, прямо к скроллбару */
+  right: 10px; 
+  top: 50%;
+  transform: translateY(-50%);
+  height: 300px; 
+  /* Ширина контейнера для правильного позиционирования элементов внутри */
+  width: 105px; 
+  z-index: 998; 
+  font-family: "Montserrat", sans-serif;
+  user-select: none;
+}
+
+/* Вертикальная шкала-основа — ТЕПЕРЬ СТРОГО СПРАВА */
+.altimeter-scale {
+  position: absolute;
+  right: 0; /* Прижимаем шкалу к правому краю контейнера */
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background-color: #eaeaea; 
+  border-radius: 2px;
+}
+
+/* Заполняющаяся линия скролла */
+.altimeter-bar {
+  position: absolute;
+  bottom: 0; 
+  right: 0;
+  width: 100%;
+  height: 0%; 
+  background-color: #000000; 
+  border-radius: 2px;
+  transition: height 0.1s ease-out;
+}
+
+/* Плавающий указатель с цифрами — ТЕПЕРЬ СЛЕВА ОТ ЛИНИИ */
+.altimeter-pointer {
+  position: absolute;
+  bottom: 0%; 
+  /* Отодвигаем маркер влево от линии, чтобы он не перекрывал её */
+  right: 14px; 
+  transform: translateY(50%); /* Центрирование по вертикали */
+  background-color: #000000;
+  color: #ffffff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: bottom 0.1s ease-out;
+}
+
+/* Стрелочка плавающего маркера — ТЕПЕРЬ СМОТРИТ НАПРАВО НА ЛИНИЮ */
+.altimeter-pointer::before {
+  content: "";
+  position: absolute;
+  right: -4px; /* Выносим стрелочку вправо за пределы маркера */
+  top: 50%;
+  transform: translateY(-50%);
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  /* Меняем border-right на border-left, чтобы развернуть стрелку направо */
+  border-left: 4px solid #000000; 
+}
+
+/* Текстовые подписи крайних точек — ТЕПЕРЬ НАХОДЯТСЯ СЛЕВА ОТ ВСЕГО */
+.altimeter-labels {
+  position: absolute;
+  /* Прижимаем подписи к левому краю контейнера, чтобы они были левее маркера */
+  left: 0; 
+  top: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 10px;
+  font-weight: 500;
+  color: #777777;
+  pointer-events: none;
+  /* Выравниваем текст по правому краю, чтобы он красиво подходил к маркеру */
+  text-align: right; 
+  width: 100%;
+  /* Небольшой отступ справа, чтобы текст не сливался со шкалой */
+  padding-right: 80px; 
+}
+
+.altimeter-labels span {
+  white-space: nowrap;
+}
+
+/* Автоматически скрываем виджет на смартфонах и планшетах */
+@media (max-width: 1024px) {
+  .altimeter-container {
+    display: none !important;
+  }
+}
+
+/* ===========================
+        АНИМАЦИЯ ФОНА
+=========================== */
+
+#mountain-mist-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  /* Закладываем холст на самый задний план, под ваш контент */
+  z-index: -1; 
+  /* Делаем холст "прозрачным" для кликов мыши */
+  pointer-events: none; 
+  /* Исходный цвет фона вашего сайта (белый) */
+  background-color: #ffffff; 
 }
