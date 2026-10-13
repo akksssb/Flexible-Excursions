@@ -211,6 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // ==========================================================================
 //          ЛОГИКА ПЕРЕКЛЮЧЕНИЯ ТАБОВ ДЛЯ ЧЕК-ЛИСТА ЭКИПИРОВКИ
 // ==========================================================================
+
 document.addEventListener('DOMContentLoaded', function () {
   const tabButtons = document.querySelectorAll('.tab-btn');
   const tabPanes = document.querySelectorAll('.checklist-pane');
@@ -234,4 +235,16 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   }
+});
+
+
+// ===========================================
+//              ЦВЕТ СКРОЛЛ
+// ===========================================
+
+window.addEventListener('scroll', () => {
+  const winScroll = document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (winScroll / height) * 100;
+  document.querySelector('.scroll-progress').style.width = scrolled + '%';
 });
