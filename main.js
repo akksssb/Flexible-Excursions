@@ -248,3 +248,116 @@ window.addEventListener('scroll', () => {
   const scrolled = (winScroll / height) * 100;
   document.querySelector('.scroll-progress').style.width = scrolled + '%';
 });
+
+
+// ===============================
+//       ИНДИКАТОР ВЫСОТЫ
+// ===============================
+
+document.addEventListener('scroll', function() {
+  const bar = document.getElementById('altimeterBar');
+  const pointer = document.getElementById('altimeterPointer');
+  const numberDisplay = document.getElementById('altimeterCurrentNumber');
+  
+  // 1. Вычисляем процент прокрутки страницы
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  
+  // Защита от деления на ноль, если страница не имеет прокрутки
+  const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  
+  // Ограничиваем в пределах от 0 до 100
+  const boundedPercent = Math.min(Math.max(scrollPercent, 0), 100);
+  
+  // 2. Применяем процент к высоте шкалы и позиции маркера
+  bar.style.height = boundedPercent + '%';
+  pointer.style.bottom = boundedPercent + '%';
+  
+  // 3. Вычисляем текущую высоту в метрах
+  // Мин. точки (старт) = 300м, Макс. точка (финиш) = 5642м
+  const minHeight = 300;
+  const maxHeight = 5642;
+  
+  const currentHeight = minHeight + ((maxHeight - minHeight) * (boundedPercent / 100));
+  
+  // Округляем до целого числа и выводим на экран
+  numberDisplay.textContent = Math.round(currentHeight);
+});
+
+// ==============================
+//        АНИМАЦИЯ ФОНА
+// ==============================
+
+(function () {
+  const canvas = document.getElementById("mountain-mist-canvas");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+
+  let width = (canvas.width = window.innerWidth);
+  let height = (canvas.height = window.innerHeight);
+
+  // Настройки эффекта
+  const maxParticles = 60; // Количество частиц на экране (не перегружает систему)
+  const particles = [];
+
+  // Конструктор отдельной частицы (снежинки/микро-тумана)
+  function Particle() {
+    this.x = Math.random() * width;
+    this.y = Math.random() * height;
+    // Делаем частицы разного размера для эффекта глубины (от 1 до 4 пикселей)
+    this.radius = Math.random() * 3 + 1; 
+    // Минимальная скорость падения вниз
+    this.vy = Math.random() * 0.4 + 0.1; 
+    // Легкое покачивание из стороны в сторону (ветер)
+    this.vx = Math.random() * 0.2 - 0.1; 
+    // Полупрозрачность в строгом стиле (от 0.05 до 0.3)
+    this.opacity = Math.random() * 0.25 + 0.05; 
+  }
+
+  // Заполняем массив начальными частицами
+  for (let i = 0; i < maxParticles; i++) {
+    particles.push(new Particle());
+  }
+
+  // Главная функция отрисовки и анимации
+  function render() {
+    // Очищаем холст на каждом кадре
+    ctx.clearRect(0, 0, width, height);
+
+    for (let i = 0; i < maxParticles; i++) {
+      const p = particles[i];
+
+      // Рисуем мягкую круглую частицу тумана
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      // Цвет строго черный (как элементы сайта), но за счет прозрачности он кажется серым дымом
+      ctx.fillStyle = `rgba(0, 0, 0, ${p.opacity})`; 
+      ctx.fill();
+
+      // Обновляем координаты (движение)
+      p.y += p.vy;
+      p.x += p.vx;
+
+      // Если частица улетела за нижний край — возвращаем её наверх
+      if (p.y > height) {
+        p.y = -10;
+        p.x = Math.random() * width;
+      }
+      // Если улетела за боковые края — переносим на противоположную сторону
+      if (p.x > width) p.x = 0;
+      else if (p.x < 0) p.x = width;
+    }
+
+    // Рекурсивный вызов для плавных 60 кадров в секунду
+    requestAnimationFrame(render);
+  }
+
+  // Корректно меняем размеры холста при изменении разрешения экрана
+  window.addEventListener("resize", function () {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  });
+
+  // Запуск магии
+  render();
+})();
